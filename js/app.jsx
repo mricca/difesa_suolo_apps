@@ -9,12 +9,14 @@
 import { checkForMissingPlugins } from '@mapstore/utils/DebugUtils';
 import main from '@mapstore/product/main';
 const ConfigUtils = require('@mapstore/utils/ConfigUtils').default;
+import("./assets/css/maps.css");
+
 /**
  * Add custom (overriding) translations with:
  *
  * ConfigUtils.setConfigProp('translationsPath', ['./MapStore2/web/client/translations', './translations']);
  */
-ConfigUtils.setConfigProp('translationsPath', './MapStore2/web/client/translations');
+ConfigUtils.setConfigProp('translationsPath', ['./MapStore2/web/client/translations', './translations']);
 ConfigUtils.setConfigProp('themePrefix', 'difesa_suolo');
 
 /**
@@ -22,7 +24,8 @@ ConfigUtils.setConfigProp('themePrefix', 'difesa_suolo');
  *
  * ConfigUtils.setLocalConfigurationFile('localConfig.json');
  */
-ConfigUtils.setLocalConfigurationFile('MapStore2/web/client/configs/localConfig.json');
+ConfigUtils.setLocalConfigurationFile('./localConfig_ds.json');
+// ConfigUtils.setLocalConfigurationFile('MapStore2/web/client/configs/localConfig.json');
 
 /**
  * Use a custom application configuration file with:
@@ -39,15 +42,23 @@ ConfigUtils.setLocalConfigurationFile('MapStore2/web/client/configs/localConfig.
  *     }]
  * });
  */
-const appConfig = require('@mapstore/product/appConfig').default;
+const appConfig = require('./appConfig').default;
+// const appConfig = require('@mapstore/product/appConfig').default;
 
 /**
  * Define a custom list of plugins with:
  *
  * const plugins = require('./plugins');
  */
-const plugins = require('@mapstore/product/plugins').default;
+// const plugins = require('@mapstore/product/plugins').default;
+// checkForMissingPlugins(plugins.plugins);
+// main(appConfig, plugins);
 
-checkForMissingPlugins(plugins.plugins);
+import plugins from '@mapstore/product/plugins';
+import customPlugins from './plugins';
+const allPlugins = {...plugins, plugins: {...plugins.plugins, ...customPlugins.plugins}};
 
-main(appConfig, plugins);
+
+checkForMissingPlugins(allPlugins.plugins);
+
+main(appConfig, allPlugins);
