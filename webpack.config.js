@@ -2,7 +2,7 @@ const path = require("path");
 const { GitRevisionPlugin } = require('git-revision-webpack-plugin');
 const DefinePlugin = require("webpack/lib/DefinePlugin");
 
-const themeEntries = require('./MapStore2/build/themes.js').themeEntries;
+// const themeEntries = require('./MapStore2/build/themes.js').themeEntries;
 const extractThemesPlugin = require('./MapStore2/build/themes.js').extractThemesPlugin;
 const ModuleFederationPlugin = require('./MapStore2/build/moduleFederation').plugin;
 
@@ -18,7 +18,10 @@ module.exports = require('./MapStore2/build/buildConfig')({
         'geostory-embedded': path.join(__dirname, "js", "geostoryEmbedded"),
         "dashboard-embedded": path.join(__dirname, "js", "dashboardEmbedded")
     },
-    themeEntries,
+    // themeEntries,
+    themeEntries: {
+        "themes/ds_theme": path.join(__dirname, "themes", "ds_theme", "theme.less")
+    },
     paths: {
         base: __dirname,
         dist: path.join(__dirname, "dist"),
