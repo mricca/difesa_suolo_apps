@@ -1,0 +1,19 @@
+.page-maps .ms-home-description {
+    background-image: url('../img/Arno_Pisa_cropped.jpg') !important;
+}
+
+.page-maps .ms-home-description {
+    background-image: url('../img/Arno_Pisa_cropped.jpg') !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    background-position: center;
+    position: relative;
+    text-shadow: 2px 2px 4px #000000;
+    color: white;
+}
+
+.page-maps .ms-home-description .container {
+    /* background-color: rgba(255, 255, 255, 0.75); */
+    background-color: var(--ms-jumbotron-bg, rgba(255, 255, 255, 0.0));
+}
